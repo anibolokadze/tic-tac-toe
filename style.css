@@ -1,0 +1,111 @@
+@import url(https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&display=swap);
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --Light-Blue:#31C3BD;
+    --Light-Blue-Hover:#65E9E4;
+    --Light-Yellow: #F2B137;
+    --Light-Yellow-Hover :#FFC860;
+    --Dark-Navy: #1A2A33;
+    --Semi-Dark-Navy: #1F3641;
+    --Silver: #A8BFC9;
+    --Silver-Hover: #DBE8ED;
+}
+body{
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--Dark-Navy);
+    padding: 0 1.5em;
+    text-align: center;
+    color: var(--Silver);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+h1{
+    font-size: 1rem;
+}
+p{
+    opacity: 0.5;
+    font-weight: 500;
+}
+button{
+    all: unset;
+    border-radius: 15px;
+}
+/* centered */
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.start-container{
+    height: 26.813rem;
+    width: 100%;
+}
+.starter-icons img{
+    margin: 0 8px 32px 0;
+}
+img{
+    width: 32px;
+}
+/* select player */
+.pick-player{
+    background-color: var(--Semi-Dark-Navy);
+    box-shadow: inset 0px -8px 0px #10212A;
+    border-radius: 15px;
+    display: grid;
+    padding: 1.5em;
+    row-gap: 1.5em;
+}
+.X-O-container{
+    background-color: var(--Dark-Navy);
+    display: flex;
+    height: 72px;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 9px;
+}
+.X-O-container img{
+    /* filter: brightness(0) saturate(100%) invert(84%) sepia(10%) saturate(437%) hue-rotate(153deg) brightness(90%) contrast(87%); */
+    filter: brightness(5%);
+}
+.X-wrapper, .O-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 50%;
+    transition: 0.4s;
+}
+/* new game buttons */
+.btn-styles{
+    width: 100%;
+    height: 56px;
+    padding-bottom: 3px;
+}
+#newGameCPU{
+    margin: 2em 0 1em 0;
+    background: var(--Light-Yellow);
+    box-shadow: inset 0px -8px 0px #CC8B13;
+    color: var(--Dark-Navy);
+}
+#newGamePlayer{
+    background: var(--Light-Blue);
+    box-shadow: inset 0px -8px 0px #118C87;;
+    color: var(--Dark-Navy);
+}
+/* hovers */
+.X-O-container button:focus{
+    border-radius: 10px;
+    background-color: var(--Silver);
+}
+#newGameCPU:hover{
+    background-color: var(--Light-Yellow-Hover);
+    cursor: pointer;
+}
+#newGamePlayer:hover{
+    background-color: var(--Light-Blue-Hover);
+    cursor: pointer;
+}
