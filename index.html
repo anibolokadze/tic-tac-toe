@@ -47,27 +47,28 @@
                     <img src="assets/icon-x.svg" alt="X-icon" />
                     <img src="assets/icon-o.svg" alt="O-icon" />
                 </div>
-                <div class="turn"></div>
+                <div class="turn" id="statusText">
+                    <p></p>
+                </div>
                 <div class="reset">
-                    <!-- <img src="/assets/icon-restart.svg" alt="restart-btn"> -->
-                    <button><img src="/assets/icon-restart.svg" alt="restart-btn"></button>
+                    <button id="resetBtn"><img src="/assets/icon-restart.svg" alt="restart-btn"></button>
                 </div>
             </div>
             <div class="board" id="board">
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
-                <div class="cell" data-cell></div>
+                <div cellIndex="0" class="cell"></div>
+                <div cellIndex="1" class="cell"></div>
+                <div cellIndex="2" class="cell"></div>
+                <div cellIndex="3" class="cell"></div>
+                <div cellIndex="4" class="cell"></div>
+                <div cellIndex="5" class="cell"></div>
+                <div cellIndex="6" class="cell"></div>
+                <div cellIndex="7" class="cell"></div>
+                <div cellIndex="8" class="cell"></div>
             </div>
             <div class="cpu-game-results">
                 <div class="x-player">
                     <span>X player</span>
-                    <span>0</span>
+                    <span id="x-player-span"></span>
                 </div>
                 <div class="ties">
                     <span>TIES</span>
@@ -75,7 +76,7 @@
                 </div>
                 <div class="o-player">
                     <span>O player</span>
-                    <span>0</span>
+                    <span id="o-player-span"></span>
                 </div>
             </div>
             

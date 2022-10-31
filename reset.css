@@ -15,3 +15,24 @@
     --Silver: #A8BFC9;
     --Silver-Hover: #DBE8ED;
 }
+body{
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--Dark-Navy);
+    /* margin: 0 1.5em; */
+    text-align: center;
+    color: var(--Silver);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h1{
+    font-size: 1rem;
+}
+p{
+    opacity: 0.5;
+    font-weight: 500;
+}
+button{
+    all: unset;
+    border-radius: 15px;
+}
