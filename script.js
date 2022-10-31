@@ -10,14 +10,20 @@ let winningSection = document.getElementById('winning');
 let restartSection = document.getElementById('restart');
 let playerWins = document.getElementById('playerWins');
 let tieSection = document.getElementById('tie');
-
+let noRestartBtn = document.getElementById('noRestartBtn');
+let winningMsg = document.getElementById('winningMsg');
+let quitBtn = document.getElementById('quitBtn');
+let nextRoundBtn = document.getElementById('nextRoundBtn');
 
 const cells = document.querySelectorAll('.cell');
 const statusText = document.getElementById('statusText');
 const resetBtn = document.getElementById('resetBtn');
 
+
+
 let resultX = document.getElementById("x-player-span");
 let resultO = document.getElementById("o-player-span");
+let resultTies = document.getElementById('ties-span');
 let options = ["", "", "", "", "", "", "", "", ""];
 
 let x = document.createElement('img');
@@ -61,6 +67,7 @@ function initializeGame(){
   statusText.textContent = `${currentPlayer}'s turn`;
   resultO.innerHTML = 0;
   resultX.innerHTML = 0;
+  resultTies.innerHTML = 0;
 }
 function cellClicked(){
   const cellIndex = this.getAttribute("cellIndex");
@@ -98,23 +105,66 @@ function checkWinner(){
   if(roundWon){
     if(`${currentPlayer}` == "X"){
       resultX.innerHTML ++;
+      winningMsg.style.display = "block";
+      winningMsg.innerHTML = "X TAKES THE ROUND"
+      playerWins.style.display = "block";
+
     } else{
       resultO.innerHTML ++;
+      winningMsg.style.display = "block";
+      winningMsg.innerHTML = "O TAKES THE ROUND"
+      playerWins.style.display = "block";
     }
-
     running = false;
+    
   } else if(!options.includes("")){
-    console.log('draw');
+    resultTies.innerHTML++;
+    tie();
   } else{
     changePlayer();
   }
 }
 function restartGame(){
+  // currentPlayer = "X";
+  // options = ["", "", "", "", "", "", "", "", ""];
+  // statusText.textContent = `${currentPlayer}'s turn`;
+  // cells.forEach(cell => cell.textContent = "");
+  // running = true;
+}
+
+// https://dev.to/bornasepic/pure-and-simple-tic-tac-toe-with-javascript-4pgn
+
+
+function showRestart(){
+  restartSection.style.display = "block";
+}
+function noRestart(){
+  restartSection.style.display = "none";
+}
+function yesRestart(){
+  restartSection.style.display = "none";
+  currentPlayer = "X";
+  options = ["", "", "", "", "", "", "", "", ""];
+  statusText.textContent = `${currentPlayer}'s turn`;
+  cells.forEach(cell => cell.textContent = "");
+  running = true;
+  resultO.innerHTML = 0;
+  resultX.innerHTML = 0;
+  resultTies.innerHTML = 0;
+}
+function nextRound(){
+  playerWins.style.display = "none";
+  tieSection.style.display = "none";
   currentPlayer = "X";
   options = ["", "", "", "", "", "", "", "", ""];
   statusText.textContent = `${currentPlayer}'s turn`;
   cells.forEach(cell => cell.textContent = "");
   running = true;
 }
-
-// https://dev.to/bornasepic/pure-and-simple-tic-tac-toe-with-javascript-4pgn
+function quit(){
+  window.location.reload();
+}
+function tie(){
+  tieSection.style.display = "block";
+  
+}

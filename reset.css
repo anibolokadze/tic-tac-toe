@@ -35,4 +35,5 @@ p{
 button{
     all: unset;
     border-radius: 15px;
+    cursor: pointer;
 }
