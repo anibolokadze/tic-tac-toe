@@ -24,9 +24,7 @@ let resultO = document.getElementById("o-player-span");
 let resultTies = document.getElementById('ties-span');
 
 let options = ["", "", "", "", "", "", "", "", ""];
-
 let currentPlayer = "X";
-
 let running = true;
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -118,6 +116,7 @@ function checkWinner(){
     changePlayer();
   }
 }
+
 function showRestart(){
   restartSection.style.display = "block";
 }
@@ -138,7 +137,9 @@ function restart(){
 function nextRound(){
   playerWins.style.display = "none";
   tieSection.style.display = "none";
-  restart();
+  options = ["", "", "", "", "", "", "", "", ""];
+  cells.forEach(cell => cell.textContent = "");
+  running = true;
 }
 function quit(){
   window.location.reload();
