@@ -4,34 +4,30 @@ let newGameCPU = document.getElementById("newGameCPU");
 let newGamePlayer = document.getElementById("newGamePlayer");
 let boardWrapper = document.getElementById('board-wrapper');
 
-
-let losingSection = document.getElementById('losing');
-let winningSection = document.getElementById('winning');
 let restartSection = document.getElementById('restart');
 let playerWins = document.getElementById('playerWins');
 let tieSection = document.getElementById('tie');
-let noRestartBtn = document.getElementById('noRestartBtn');
-let winningMsg = document.getElementById('winningMsg');
-let quitBtn = document.getElementById('quitBtn');
-let nextRoundBtn = document.getElementById('nextRoundBtn');
 
-const cells = document.querySelectorAll('.cell');
-const statusText = document.getElementById('statusText');
-const resetBtn = document.getElementById('resetBtn');
+let XWINS = document.getElementById('x-wins');
+let OWINS = document.getElementById('o-wins');
 
+let O_IMG = document.getElementById('o-img');
+let X_IMG = document.getElementById('x-img');
 
+let cells = document.querySelectorAll('.cell');
+let statusText = document.getElementById('statusText');
+
+let resetBtn = document.getElementById('resetBtn');
 
 let resultX = document.getElementById("x-player-span");
 let resultO = document.getElementById("o-player-span");
 let resultTies = document.getElementById('ties-span');
+
 let options = ["", "", "", "", "", "", "", "", ""];
 
-let x = document.createElement('img');
-x.src = "assets/icon-x.svg";
 let currentPlayer = "X";
 
 let running = true;
-
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -43,27 +39,26 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6]
 ]
 
-newGameCPU.addEventListener('click', newGame);
-function newGame(){
-    startContainer.style.display = "none";
-    newGameCPU.style.display = "block";
-    newGamePlayer.style.display = "none";
-    boardWrapper.style.display = "block";
+newGameCPU.addEventListener('click', newGameC);
+function newGameC(){
+  startContainer.style.display = "none";
+  newGameCPU.style.display = "block";
+  newGamePlayer.style.display = "none";
+  boardWrapper.style.display = "block";
 };
+
 newGamePlayer.addEventListener('click', newGameP);
 function newGameP(){
-    startContainer.style.display = "none";
-    newGameCPU.style.display = "none";
-    newGamePlayer.style.display = "block";
-    boardWrapper.style.display = "block";
+  startContainer.style.display = "none";
+  newGameCPU.style.display = "none";
+  boardWrapper.style.display = "block";
 
-    initializeGame();
+  startGame();
 }
 
 
-function initializeGame(){
+function startGame(){
   cells.forEach(cell => cell.addEventListener('click',cellClicked));
-  resetBtn.addEventListener('click', restartGame);
   statusText.textContent = `${currentPlayer}'s turn`;
   resultO.innerHTML = 0;
   resultX.innerHTML = 0;
@@ -105,43 +100,31 @@ function checkWinner(){
   if(roundWon){
     if(`${currentPlayer}` == "X"){
       resultX.innerHTML ++;
-      winningMsg.style.display = "block";
-      winningMsg.innerHTML = "X TAKES THE ROUND"
       playerWins.style.display = "block";
-
+      XWINS.style.display = "block";
+      OWINS.style.display = "none";
     } else{
       resultO.innerHTML ++;
-      winningMsg.style.display = "block";
-      winningMsg.innerHTML = "O TAKES THE ROUND"
       playerWins.style.display = "block";
+      OWINS.style.display = "block";
+      XWINS.style.display = "none";
     }
     running = false;
-    
+
   } else if(!options.includes("")){
     resultTies.innerHTML++;
-    tie();
+    tieSection.style.display = "block";
   } else{
     changePlayer();
   }
 }
-function restartGame(){
-  // currentPlayer = "X";
-  // options = ["", "", "", "", "", "", "", "", ""];
-  // statusText.textContent = `${currentPlayer}'s turn`;
-  // cells.forEach(cell => cell.textContent = "");
-  // running = true;
-}
-
-// https://dev.to/bornasepic/pure-and-simple-tic-tac-toe-with-javascript-4pgn
-
-
 function showRestart(){
   restartSection.style.display = "block";
 }
-function noRestart(){
+function cancel(){
   restartSection.style.display = "none";
 }
-function yesRestart(){
+function restart(){
   restartSection.style.display = "none";
   currentPlayer = "X";
   options = ["", "", "", "", "", "", "", "", ""];
@@ -155,16 +138,8 @@ function yesRestart(){
 function nextRound(){
   playerWins.style.display = "none";
   tieSection.style.display = "none";
-  currentPlayer = "X";
-  options = ["", "", "", "", "", "", "", "", ""];
-  statusText.textContent = `${currentPlayer}'s turn`;
-  cells.forEach(cell => cell.textContent = "");
-  running = true;
+  restart();
 }
 function quit(){
   window.location.reload();
-}
-function tie(){
-  tieSection.style.display = "block";
-  
 }

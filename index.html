@@ -11,7 +11,7 @@
 <body>
     <main>
         <!-- start page -->
-        <div class="top">
+        <div class="starter-page">
             <div class="start-container" id="start-container" >
                 <div class="starter-icons">
                     <img src="assets/icon-x.svg" alt="X-icon" />
@@ -33,10 +33,8 @@
                     <p>REMEMBER : X GOES FIRST</p>
                 </div>
         
-                <div class="new-game-btn">
-                    <button id="newGameCPU" class="btn-styles btn">NEW GAME (VS CPU)</button>
-                    <button id="newGamePlayer" class="btn-styles btn">NEW GAME (VS PLAYER)</button>
-                </div>
+                <button id="newGameCPU" class="btn-styles">NEW GAME (VS CPU)</button>
+                <button id="newGamePlayer" class="btn-styles">NEW GAME (VS PLAYER)</button>
             </div>
         </div>
 
@@ -49,6 +47,8 @@
                 </div>
                 <div class="turn" id="statusText">
                     <p></p>
+                    <img src="assets/icon-x.svg" alt="x-icon" class="X_IMG">
+                    <img src="assets/icon-o.svg" alt="x-icon" class="O_IMG">
                 </div>
                 <div class="reset">
                     <button id="resetBtn"><img src="/assets/icon-restart.svg" alt="restart-btn" onclick="showRestart()"></button>
@@ -65,7 +65,8 @@
                 <div cellIndex="7" class="cell"></div>
                 <div cellIndex="8" class="cell"></div>
             </div>
-            <div class="cpu-game-results">
+            <!-- result section -->
+            <div class="game-results">
                 <div class="x-player">
                     <span>X player</span>
                     <span id="x-player-span"></span>
@@ -80,63 +81,41 @@
                 </div>
             </div>
             
-            <div class="result-message" id="resultMessage">
-                <!-- losing section -->
-                <div id="losing">
-                    <p>OH NO, YOU LOST…</p>
-                    <div data-winning-message-text></div>
-                    <button id="quitBtn">QUIT</button>
-                    <button id="nextRoundBtn">NEXT ROUND</button>
+            <!-- restart section -->
+            <div id="restart">
+                <div class="content">
+                    <h2>RESTART GAME?</h2>
+                    <div class="restart-btns">
+                        <button id="noRestartBtn" onclick="cancel()">NO, CANCEL</button>
+                        <button id="yesRestartBtn" onclick="restart()">YES, RESTART</button>
+                    </div>
                 </div>
-                
-                <!-- winning section -->
-                <div id="winning">
-                    <p>YOU WON!</p>
-                    <button id="quitBtn">QUIT</button>
-                    <button id="nextRoundBtn">NEXT ROUND</button>
-                </div>
+            </div>
 
-                <!-- restart section -->
-                <div id="restart">
-                    <div class="content">
-                        <h2 id="restart-heading">RESTART GAME?</h2>
-                        <div class="restart-btns">
-                            <button id="noRestartBtn" onclick="noRestart()">NO, CANCEL</button>
-                            <button id="yesRestartBtn" onclick="yesRestart()">YES, RESTART</button>
-                        </div>
-                       
+            <!-- player wins -->
+            <div id="playerWins">
+                <div class="content">
+                    <h2 id="x-wins"><img src="assets/icon-x.svg" alt="x-icon"> TAKES THE ROUND</h2>
+                    <h2 id="o-wins"><img src="assets/icon-o.svg" alt="o-icon"> TAKES THE ROUND</h2>
+                    <div class="restart-btns">
+                        <button id="quitBtn" onclick="quit()">QUIT</button>
+                        <button id="nextRoundBtn" onclick="nextRound()">NEXT ROUND</button>
                     </div>
-                    
                 </div>
-                <!-- player wins -->
-                <div id="playerWins">
-                    <div class="content">
-                        <p id="winningMsg"></p>
-                        <div class="restart-btns">
-                            <button id="quitBtn" onclick="quit()">QUIT</button>
-                            <button id="nextRoundBtn" onclick="nextRound()">NEXT ROUND</button>
-                        </div>
-                    </div>
-                   
-                </div>
+            </div>
     
-                <!-- tie -->
-                <div id="tie">
-                    <div class="content">
-                        <p>ROUND TIED</p>
-                        <div class="restart-btns">
-                            <button id="quitBtn" onclick="quit()">QUIT</button>
-                            <button id="nextRoundBtn" onclick="nextRound()">NEXT ROUND</button>
-                        </div>
+            <!-- tie -->
+            <div id="tie">
+                <div class="content">
+                    <h2>ROUND TIED</h2>
+                    <div class="restart-btns">
+                        <button id="quitBtn" onclick="quit()">QUIT</button>
+                        <button id="nextRoundBtn" onclick="nextRound()">NEXT ROUND</button>
                     </div>
-                    
                 </div>
             </div>
         </div>
-        
     </main>
-   
-
     <script src="script.js"></script>
 </body>
 </html>
