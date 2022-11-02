@@ -22,11 +22,11 @@
                     <h1>PICK PLAYER 1'S MARK</h1>
         
                     <div class="X-O-container">
-                        <button class="X-wrapper">
+                        <button class="X-wrapper" value="X">
                             <img src="assets/Combined Shape Copy 2.png" alt="X-icon"/>
                         </button>
         
-                        <button class="O-wrapper">
+                        <button class="O-wrapper" value="O">
                             <img src="assets/Oval Copy.png" alt="O-icon" />
                         </button>
                     </div>
@@ -68,7 +68,7 @@
             <!-- result section -->
             <div class="game-results">
                 <div class="x-player">
-                    <span>X player</span>
+                    <span id="playerTitle">X (P2)</span>
                     <span id="x-player-span"></span>
                 </div>
                 <div class="ties">
@@ -76,11 +76,11 @@
                     <span id="ties-span"></span>
                 </div>
                 <div class="o-player">
-                    <span>O player</span>
+                    <span>O (P1)</span>
                     <span id="o-player-span"></span>
                 </div>
             </div>
-            
+        
             <!-- restart section -->
             <div id="restart">
                 <div class="content">
