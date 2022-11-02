@@ -11,8 +11,8 @@ let tieSection = document.getElementById('tie');
 let XWINS = document.getElementById('x-wins');
 let OWINS = document.getElementById('o-wins');
 
-let O_IMG = document.getElementById('o-img');
 let X_IMG = document.getElementById('x-img');
+let O_IMG = document.getElementById('o-img');
 
 let xPlayer = document.querySelector('.X-wrapper');
 let oPlayer = document.querySelector('.O-wrapper');
@@ -27,12 +27,15 @@ let resultO = document.getElementById("o-player-span");
 let resultTies = document.getElementById('ties-span');
 let xPlayerTitle = document.getElementById('xPlayerTitle');
 let oPlayerTitle = document.getElementById('oPlayerTitle');
+let player1Wins = document.getElementById('player1Wins');
+let player2Wins = document.getElementById('player2Wins');
 
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer;
 
 let xIcon = '<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z" fill="#31C3BD" fill-rule="evenodd"/></svg>';
 let oIcon = '<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M32 0c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C14.327 64 0 49.673 0 32 0 14.327 14.327 0 32 0Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z" fill="#F2B137"/></svg>';
+
 
 let running = true;
 
@@ -108,6 +111,7 @@ function cellClicked(){
 function updateCell(cell, index){
   options[index] = currentPlayer;
   cell.innerHTML = currentPlayer === "X" ? xIcon : oIcon;
+  
 }
 function changePlayer(){
   currentPlayer = (currentPlayer == "X") ? "O" : "X";
@@ -135,12 +139,20 @@ function checkWinner(){
       playerWins.style.display = "block";
       XWINS.style.display = "block";
       OWINS.style.display = "none";
+      X_IMG.style.display = "block";
+      O_IMG.style.display = "none";
+      player1Wins.style.display = "block";
+      player2Wins.style.display = "none";
 
     } else{
       resultO.innerHTML ++;
       playerWins.style.display = "block";
       OWINS.style.display = "block";
       XWINS.style.display = "none";
+      X_IMG.style.display = "none";
+      O_IMG.style.display = "block";
+      player1Wins.style.display = "none";
+      player2Wins.style.display = "block";
     }
     running = false;
 

@@ -68,7 +68,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 1.5em;
+  row-gap: 1em;
 }
 .restart-btns{
   display: flex;
@@ -239,4 +239,12 @@
 }
 #resetBtn:hover, #noRestartBtn:hover, #quitBtn:hover{
   background-color: var(--Silver-Hover);
+}
+
+#o-img, #x-img, #player1Wins, #player1Wins{
+  display: none;
+}
+.img{
+  display: flex;
+  gap: 8px;
 }

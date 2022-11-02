@@ -68,7 +68,7 @@
             <!-- result section -->
             <div class="game-results">
                 <div class="x-player">
-                    <span id="playerTitle">X (P2)</span>
+                    <span id="playerTitle">X (P1)</span>
                     <span id="x-player-span"></span>
                 </div>
                 <div class="ties">
@@ -76,7 +76,7 @@
                     <span id="ties-span"></span>
                 </div>
                 <div class="o-player">
-                    <span>O (P1)</span>
+                    <span>O (P2)</span>
                     <span id="o-player-span"></span>
                 </div>
             </div>
@@ -95,8 +95,18 @@
             <!-- player wins -->
             <div id="playerWins">
                 <div class="content">
-                    <h2 id="x-wins"><img src="assets/icon-x.svg" alt="x-icon"> TAKES THE ROUND</h2>
-                    <h2 id="o-wins"><img src="assets/icon-o.svg" alt="o-icon"> TAKES THE ROUND</h2>
+                   
+                   <h3 id="player1Wins">PLAYER 1 WINS!</h3>
+                   <h3 id="player2Wins">PLAYER 2 WINS!</h3>
+                    <div class="img">
+                        <img src="assets/icon-x.svg" alt="x-icon" id="x-img">
+                        <h2 id="x-wins"> TAKES THE ROUND</h2>
+                    </div>
+                    <div class="img">
+                        <img src="assets/icon-o.svg" alt="o-icon" id="o-img">
+                        <h2 id="o-wins"> TAKES THE ROUND</h2>
+                    </div>
+                    
                     <div class="restart-btns">
                         <button id="quitBtn" onclick="quit()">QUIT</button>
                         <button id="nextRoundBtn" onclick="nextRound()">NEXT ROUND</button>
