@@ -3,8 +3,7 @@ let startContainer = document.getElementById('start-container');
 let newGameCPU = document.getElementById("newGameCPU");
 let newGamePlayer = document.getElementById("newGamePlayer");
 let boardWrapper = document.getElementById('board-wrapper');
-let xPlayer = document.getElementsByClassName('.X-wrapper')
-let oPlayer = document.getElementsByClassName('.O-wrapper')
+
 let restartSection = document.getElementById('restart');
 let playerWins = document.getElementById('playerWins');
 let tieSection = document.getElementById('tie');
@@ -15,6 +14,9 @@ let OWINS = document.getElementById('o-wins');
 let O_IMG = document.getElementById('o-img');
 let X_IMG = document.getElementById('x-img');
 
+let xPlayer = document.querySelector('.X-wrapper');
+let oPlayer = document.querySelector('.O-wrapper');
+
 let cells = document.querySelectorAll('.cell');
 let statusText = document.getElementById('statusText');
 
@@ -23,7 +25,8 @@ let resetBtn = document.getElementById('resetBtn');
 let resultX = document.getElementById("x-player-span");
 let resultO = document.getElementById("o-player-span");
 let resultTies = document.getElementById('ties-span');
-let playerTitle = document.getElementById('playerTitle');
+let xPlayerTitle = document.getElementById('xPlayerTitle');
+let oPlayerTitle = document.getElementById('oPlayerTitle');
 
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer;
@@ -47,6 +50,23 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6]
 ]
 
+
+xPlayer.addEventListener('click', () => {
+  currentPlayer = xPlayer.value;
+  newGamePlayer.disabled = false;
+});
+
+oPlayer.addEventListener('click', () => {
+  currentPlayer = oPlayer.value;
+  newGamePlayer.disabled = false;
+});
+
+if(currentPlayer == null){
+  newGamePlayer.disabled = true;
+}
+
+
+
 newGameCPU.addEventListener('click', newGameC);
 function newGameC(){
   startContainer.style.display = "none";
@@ -57,14 +77,12 @@ function newGameC(){
 
 newGamePlayer.addEventListener('click', newGameP);
 function newGameP(){
-  // startContainer.style.display = "none";
-  // newGameCPU.style.display = "none";
-  // boardWrapper.style.display = "block";
-
-  
-
+  startContainer.style.display = "none";
+  newGameCPU.style.display = "none";
+  boardWrapper.style.display = "block";
   startGame();
 }
+
 
 function startGame(){
   cells.forEach(cell => cell.addEventListener('click',cellClicked));
@@ -72,15 +90,12 @@ function startGame(){
   resultO.innerHTML = 0;
   resultX.innerHTML = 0;
   resultTies.innerHTML = 0;
-
-  if(xPlayer.clicked == true ){
-    console.log('new game');
-  } else if(oPlayer.clicked == true){
-    console.log("O")
-  } else{
-    return null;
-  }
 }
+
+
+
+
+
 function cellClicked(){
   const cellIndex = this.getAttribute("cellIndex");
   if(options[cellIndex] != "" || !running){
@@ -120,6 +135,7 @@ function checkWinner(){
       playerWins.style.display = "block";
       XWINS.style.display = "block";
       OWINS.style.display = "none";
+
     } else{
       resultO.innerHTML ++;
       playerWins.style.display = "block";
@@ -143,15 +159,7 @@ function cancel(){
   restartSection.style.display = "none";
 }
 function restart(){
-  restartSection.style.display = "none";
-  currentPlayer = "X";
-  options = ["", "", "", "", "", "", "", "", ""];
-  statusText.textContent = `${currentPlayer} turn`;
-  cells.forEach(cell => cell.textContent = "");
-  running = true;
-  resultO.innerHTML = 0;
-  resultX.innerHTML = 0;
-  resultTies.innerHTML = 0;
+  window.location.reload();
 }
 function nextRound(){
   playerWins.style.display = "none";
