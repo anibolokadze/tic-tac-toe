@@ -41,7 +41,6 @@
   justify-content: center;
   align-items: center;
   flex-basis: 50%;
-  transition: 0.9s;
 }
 /* new game buttons */
 .btn-styles{
@@ -228,7 +227,10 @@
   box-shadow: inset 0px -4px 0px var(--Light-Yellow-Shadow);
 }
 /* hovers */
-.X-O-container button:focus, .X-O-container button:hover{
+.X-O-container button:hover, .X-O-container button:focus{
+  background-color: var(--Silver);
+}
+.X-O-container button:focus{
   background-color: var(--Silver);
 }
 #newGameCPU:hover, #yesRestartBtn:hover,#nextRoundBtn:hover{
@@ -240,11 +242,22 @@
 #resetBtn:hover, #noRestartBtn:hover, #quitBtn:hover{
   background-color: var(--Silver-Hover);
 }
-
 #o-img, #x-img, #player1Wins, #player1Wins{
   display: none;
 }
 .img{
   display: flex;
   gap: 8px;
+}
+
+
+.ohover:hover{
+  background-image: url('assets/icon-o-outline.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.xhover:hover{
+  background-image: url('assets/icon-x-outline.svg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
