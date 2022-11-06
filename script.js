@@ -16,6 +16,9 @@ let O_IMG = document.getElementById('o-img');
 
 let xPlayer = document.querySelector('.X-wrapper');
 let oPlayer = document.querySelector('.O-wrapper');
+let oPlayerYou = document.getElementById('oPlayerYou');
+let xPlayerYou = document.getElementById('oPlayerYou');
+
 
 let cells = document.querySelectorAll('.cell');
 let statusText = document.getElementById('statusText');
@@ -24,11 +27,19 @@ let resetBtn = document.getElementById('resetBtn');
 
 let resultX = document.getElementById("x-player-span");
 let resultO = document.getElementById("o-player-span");
+let text = document.getElementById('text');
+let gameResults = document.getElementsByClassName('game-results');
+
+
+
 let resultTies = document.getElementById('ties-span');
 let xPlayerTitle = document.getElementById('xPlayerTitle');
 let oPlayerTitle = document.getElementById('oPlayerTitle');
 let player1Wins = document.getElementById('player1Wins');
 let player2Wins = document.getElementById('player2Wins');
+
+
+
 
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer;
@@ -58,15 +69,28 @@ const WINNING_COMBINATIONS = [
 xPlayer.addEventListener('click', () => {
   currentPlayer = xPlayer.value;
   newGamePlayer.disabled = false;
+  newGameCPU.disabled = false;
+
+  if(currentPlayer = xPlayer.value){
+    xPlayerTitle.textContent = "X (YOU)";
+    oPlayerTitle.textContent = "O (CPU)";
+  } 
 });
 
 oPlayer.addEventListener('click', () => {
   currentPlayer = oPlayer.value;
   newGamePlayer.disabled = false;
+  newGameCPU.disabled = false;
+
+  if(currentPlayer = oPlayer.value){
+    oPlayerTitle.textContent = "X (CPU)";
+    xPlayerTitle.textContent = "O (YOU)";
+  } 
 });
 
 if(currentPlayer == null){
   newGamePlayer.disabled = true;
+  newGameCPU.disabled = true;
 }
 
 
@@ -77,6 +101,9 @@ function newGameC(){
   newGameCPU.style.display = "block";
   newGamePlayer.style.display = "none";
   boardWrapper.style.display = "block";
+
+  startGame();
+  
 };
 
 newGamePlayer.addEventListener('click', newGameP);
@@ -84,6 +111,8 @@ function newGameP(){
   startContainer.style.display = "none";
   newGameCPU.style.display = "none";
   boardWrapper.style.display = "block";
+  xPlayerTitle.textContent = "X (P1)";
+  oPlayerTitle.textContent = "O (P2)"
   startGame();
 }
 

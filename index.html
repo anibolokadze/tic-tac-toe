@@ -47,8 +47,7 @@
                 </div>
                 <div class="turn" id="statusText">
                     <p></p>
-                    <img src="assets/icon-x.svg" alt="x-icon" class="X_IMG">
-                    <img src="assets/icon-o.svg" alt="x-icon" class="O_IMG">
+
                 </div>
                 <div class="reset">
                     <button id="resetBtn"><img src="/assets/icon-restart.svg" alt="restart-btn" onclick="showRestart()"></button>
@@ -65,10 +64,12 @@
                 <div cellIndex="7" class="cell xhover"></div>
                 <div cellIndex="8" class="cell xhover"></div>
             </div>
-            <!-- result section -->
+            <!-- player vs player result section -->
             <div class="game-results">
                 <div class="x-player">
-                    <span id="playerTitle">X (P1)</span>
+                    <span id="xPlayerTitle">X (P1)</span>
+                    <span id="xPlayerYou"></span>
+                    <span id="oPlayerYou"></span>
                     <span id="x-player-span"></span>
                 </div>
                 <div class="ties">
@@ -76,7 +77,7 @@
                     <span id="ties-span"></span>
                 </div>
                 <div class="o-player">
-                    <span>O (P2)</span>
+                    <span id="oPlayerTitle">O (P2)</span>
                     <span id="o-player-span"></span>
                 </div>
             </div>
