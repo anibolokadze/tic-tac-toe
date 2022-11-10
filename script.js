@@ -93,19 +93,6 @@ if(currentPlayer == null){
   newGameCPU.disabled = true;
 }
 
-
-
-newGameCPU.addEventListener('click', newGameC);
-function newGameC(){
-  startContainer.style.display = "none";
-  newGameCPU.style.display = "block";
-  newGamePlayer.style.display = "none";
-  boardWrapper.style.display = "block";
-
-  startGame();
-  
-};
-
 newGamePlayer.addEventListener('click', newGameP);
 function newGameP(){
   startContainer.style.display = "none";
@@ -200,13 +187,142 @@ function restart(){
   window.location.reload();
 }
 function nextRound(){
-  playerWins.style.display = "none";
-  tieSection.style.display = "none";
-  options = ["", "", "", "", "", "", "", "", ""];
-  cells.forEach(cell => cell.textContent = "");
-  running = true;
+   playerWins.style.display = "none";
+   tieSection.style.display = "none";
+   options = ["", "", "", "", "", "", "", "", ""];
+   cells.forEach(cell => cell.textContent = "");
+   running = true;
+
+  //  newGameC();
+  
 }
 function quit(){
   window.location.reload();
 }
+
+
+
+
+
+
+
+
+// minimax
+
+let origBoard;
+const huPlayer = 'X';
+const aiPlayer = 'O';
+
+newGameCPU.addEventListener('click', newGameC);
+function newGameC(){
+  startContainer.style.display = "none";
+  newGameCPU.style.display = "block";
+  newGamePlayer.style.display = "none";
+  boardWrapper.style.display = "block";
+
+  
+
+  startGameCPU();
+
+};
+
+function startGameCPU(){
+  resultO.innerHTML = 0;
+  resultX.innerHTML = 0;
+  resultTies.innerHTML = 0;
+  statusText.textContent = `${currentPlayer} turn`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function startGameCPU(){
+//   resultO.innerHTML = 0;
+//   resultX.innerHTML = 0;
+//   resultTies.innerHTML = 0;
+//   statusText.textContent = `${currentPlayer} turn`;
+
+//   origBoard = Array.from(Array(9).keys());
+//   for(let i = 0; i < cells.length; i++){
+//     cells[i].addEventListener('click', turnClick, false);
+//   }
+// }
+// function turnClick(square){
+//   if(typeof origBoard[square.target.id] == 'number'){
+//     turn(square.target.id, huPlayer);
+//     if(!checkTie()) turn(bestSpot(), aiPlayer);
+//   }
+
+// }
+// function turn(squareId, player){
+//   origBoard[squareId] = player;
+//   document.getElementById(squareId).innerHTML = player === "X" ? xIcon : oIcon;
+//   statusText.textContent = `${player} turn`;
+
+//   let gameWon = checkWin(origBoard, player);
+//   if(gameWon) gameOver(gameWon);
+// }
+// function checkWin(board, player){
+//   let plays = board.reduce((a, e, i) => (e === player) ? a.concat(i) : a, []);
+//   let gameWon = null;
+//   for (let [index, win] of WINNING_COMBINATIONS.entries()) {
+// 		if (win.every(elem => plays.indexOf(elem) > -1)) {
+// 			gameWon = {index: index, player: player};
+// 			break;
+// 		}
+// 	}
+//   return gameWon;
+// }
+// function gameOver(gameWon) {
+// 	for (let i = 0; i < cells.length; i++) {
+// 		cells[i].removeEventListener('click', turnClick, false);
+// 	}
+
+  
+//   declareWinner(gameWon.player == huPlayer ? resultX.innerHTML ++ : resultO.innerHTML ++) ? checkTie() : resultTies++;
+
+// }
+
+
+// function declareWinner(who) {
+//   playerWins.style.display = 'block';
+// }
+// function emptySquares(){
+//   return origBoard.filter(s => typeof s == 'number')
+// }
+// function bestSpot(){
+//   return emptySquares()[0];
+// }
+// function checkTie() {
+// 	if (emptySquares().length == 0) {
+// 		for (let i = 0; i < cells.length; i++) {
+// 			cells[i].removeEventListener('click', turnClick, false);
+// 		}
+//     declareWinner("Tie Game!");
+// 		return true;
+
+// 	}
+
+// 	return false;
+// }
+
+
+
+
+
 
