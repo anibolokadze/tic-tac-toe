@@ -192,6 +192,7 @@ function nextRound(){
    options = ["", "", "", "", "", "", "", "", ""];
    cells.forEach(cell => cell.textContent = "");
    running = true;
+
   
 }
 function quit(){
@@ -209,12 +210,115 @@ function newGameC(){
 
 };
 
+
+
+let origBoard;
+const huPlayer = 'X';
+const aiPlayer = 'O';
+
 function startGameCPU(){
   resultO.innerHTML = 0;
   resultX.innerHTML = 0;
   resultTies.innerHTML = 0;
   statusText.textContent = `${currentPlayer} turn`;
 
+
+
+	origBoard = Array.from(Array(9).keys());
+  cells.forEach(cell => cell.addEventListener('click',turnClick));
+	// for (let i = 0; i < cells.length; i++) {
+	// 	cells[i].addEventListener('click', turnClick, false);
+	// }
 }
+
+
+
+function turnClick(square) {
+	if (typeof origBoard[square.target.id] == 'number') {
+		turn(square.target.id, huPlayer)
+		if (!checkTie()) turn(bestSpot(), aiPlayer);
+	}
+}
+
+
+function turn(squareId, player) {
+	origBoard[squareId] = player;
+	document.getElementById(squareId).innerHTML = player === "X" ? xIcon : oIcon;
+
+	let gameWon = checkWin(origBoard, player)
+	if (gameWon) gameOver(gameWon)
+}
+
+
+function checkWin(board, player) {
+	let plays = board.reduce((a, e, i) => 
+		(e === player) ? a.concat(i) : a, []);
+	let gameWon = false;
+	for (let [index, win] of WINNING_COMBINATIONS.entries()) {
+		if (win.every(elem => plays.indexOf(elem) > -1)) {
+			gameWon = {index: index, player: player};
+			break;
+		}
+	}
+	return gameWon;
+}
+
+function gameOver(gameWon) {
+	for (let i = 0; i < cells.length; i++) {
+		cells[i].removeEventListener('click', turnClick, false);
+	}
+	declareWinner(gameWon);
+}
+
+function declareWinner(gameWon) {
+  if(gameWon.player == huPlayer){
+    playerWins.style.display = "block";
+    player1Wins.style.display = "block";
+    player2Wins.style.display = "none";
+    resultX.textContent++;
+  } else if(gameWon.player == aiPlayer){
+    playerWins.style.display = "block";
+    player1Wins.style.display = "none";
+    player2Wins.style.display = "block";
+    resultO.textContent++;
+  }  else{
+    tieSection.style.display = "block";
+  }
+}
+
+function emptySquares() {
+	return origBoard.filter(s => typeof s == 'number');
+}
+
+function bestSpot() {
+	return emptySquares()[0];
+}
+
+function checkTie() {
+	if (emptySquares().length == 0) {
+		for (let i = 0; i < cells.length; i++) {
+			cells[i].removeEventListener('click', turnClick, false);
+		}
+		declareWinner("Tie Game!")
+		return true;
+	}
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
