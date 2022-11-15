@@ -1,4 +1,4 @@
-"use strict"
+
 let startContainer = document.getElementById('start-container');
 let newGameCPU = document.getElementById("newGameCPU");
 let newGamePlayer = document.getElementById("newGamePlayer");
@@ -204,10 +204,14 @@ function nextRound(){
   origBoard = Array.from(Array(9).keys());
   cells.forEach(cell => cell.addEventListener('click',turnClick));
 
+
 }
 function quit(){
   window.location.reload();
 }
+
+
+
 
 
 
@@ -218,49 +222,48 @@ function newGameC(){
   newGameCPU.style.display = "block";
   newGamePlayer.style.display = "none";
   boardWrapper.style.display = "block";
+
   startGameCPU();
-  
 };
-
-
-
 
 function startGameCPU(){
   resultO.innerHTML = 0;
   resultX.innerHTML = 0;
   resultTies.innerHTML = 0;
   statusText.textContent = `${currentPlayer} turn`;
-
-
-
-
 	origBoard = Array.from(Array(9).keys());
   cells.forEach(cell => cell.addEventListener('click',turnClick));
 
-
 }
-
 
 function turnClick(square) {
 	if (typeof origBoard[square.target.id] == 'number') {
-		turn(square.target.id, huPlayer)
+		turn(square.target.id, huPlayer);
 		if (!checkTie()) turn(bestSpot(), aiPlayer);
 	}
+
+
 }
 
 
 function turn(squareId, player) {
-	origBoard[squareId] = player;
-	document.getElementById(squareId).innerHTML = player === "X" ? xIcon : oIcon;
-
-	let gameWon = checkWin(origBoard, player)
-	if (gameWon) gameOver(gameWon)
+  origBoard[squareId] = player;
+  setTimeout(() => {
+    document.getElementById(squareId).innerHTML = player === "X" ? xIcon : oIcon;
+  }, 200)
+	
+	let gameWon = checkWin(origBoard, player);
+	if (gameWon) gameOver(gameWon);
 }
 
 
+
+
+
+
+
 function checkWin(board, player) {
-	let plays = board.reduce((a, e, i) => 
-		(e === player) ? a.concat(i) : a, []);
+	let plays = board.reduce((a, e, i) => (e === player) ? a.concat(i) : a, []);
 	let gameWon = null;
 	for (let [index, win] of WINNING_COMBINATIONS.entries()) {
 		if (win.every(elem => plays.indexOf(elem) > -1)) {
