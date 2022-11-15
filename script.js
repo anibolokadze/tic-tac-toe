@@ -76,6 +76,7 @@ xPlayer.addEventListener('click', () => {
     xPlayerTitle.textContent = "X (YOU)";
     oPlayerTitle.textContent = "O (CPU)";
   } 
+
 });
 
 oPlayer.addEventListener('click', () => {
@@ -86,7 +87,11 @@ oPlayer.addEventListener('click', () => {
   if(currentPlayer = oPlayer.value){
     oPlayerTitle.textContent = "X (CPU)";
     xPlayerTitle.textContent = "O (YOU)";
+
+    
   } 
+
+
 });
 
 if(currentPlayer == null){
@@ -190,17 +195,21 @@ function restart(){
   window.location.reload();
 }
 function nextRound(){
-   playerWins.style.display = "none";
-   tieSection.style.display = "none";
-   options = ["", "", "", "", "", "", "", "", ""];
-   cells.forEach(cell => cell.textContent = "");
-   running = true; 
+  playerWins.style.display = "none";
+  tieSection.style.display = "none";
+  options = ["", "", "", "", "", "", "", "", ""];
+  cells.forEach(cell => cell.textContent = "");
+  running = true; 
 
-   
+  origBoard = Array.from(Array(9).keys());
+  cells.forEach(cell => cell.addEventListener('click',turnClick));
+
 }
 function quit(){
   window.location.reload();
 }
+
+
 
 
 newGameCPU.addEventListener('click', newGameC);
@@ -210,9 +219,8 @@ function newGameC(){
   newGamePlayer.style.display = "none";
   boardWrapper.style.display = "block";
   startGameCPU();
-
+  
 };
-
 
 
 
@@ -225,8 +233,11 @@ function startGameCPU(){
 
 
 
+
 	origBoard = Array.from(Array(9).keys());
   cells.forEach(cell => cell.addEventListener('click',turnClick));
+
+
 }
 
 
@@ -301,6 +312,7 @@ function declareWinner(gameWon) {
 
   }  else{
     tieSection.style.display = "block";
+    resultTies.textContent++;
   }
 }
 
@@ -322,15 +334,3 @@ function checkTie() {
 	}
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
