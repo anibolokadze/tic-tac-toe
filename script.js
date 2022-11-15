@@ -16,8 +16,7 @@ let O_IMG = document.getElementById('o-img');
 
 let xPlayer = document.querySelector('.X-wrapper');
 let oPlayer = document.querySelector('.O-wrapper');
-let oPlayerYou = document.getElementById('oPlayerYou');
-let xPlayerYou = document.getElementById('oPlayerYou');
+
 
 
 let cells = document.querySelectorAll('.cell');
@@ -39,8 +38,6 @@ let player1Wins = document.getElementById('player1Wins');
 let player2Wins = document.getElementById('player2Wins');
 
 
-
-
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer;
 
@@ -53,6 +50,10 @@ let running = true;
 
 
 let player;
+
+let origBoard;
+let huPlayer = 'X';
+let aiPlayer = 'O';
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -110,6 +111,8 @@ function startGame(){
   resultO.innerHTML = 0;
   resultX.innerHTML = 0;
   resultTies.innerHTML = 0;
+
+  
 }
 
 function cellClicked(){
@@ -191,9 +194,9 @@ function nextRound(){
    tieSection.style.display = "none";
    options = ["", "", "", "", "", "", "", "", ""];
    cells.forEach(cell => cell.textContent = "");
-   running = true;
+   running = true; 
 
-  
+   
 }
 function quit(){
   window.location.reload();
@@ -212,9 +215,7 @@ function newGameC(){
 
 
 
-let origBoard;
-const huPlayer = 'X';
-const aiPlayer = 'O';
+
 
 function startGameCPU(){
   resultO.innerHTML = 0;
@@ -226,11 +227,7 @@ function startGameCPU(){
 
 	origBoard = Array.from(Array(9).keys());
   cells.forEach(cell => cell.addEventListener('click',turnClick));
-	// for (let i = 0; i < cells.length; i++) {
-	// 	cells[i].addEventListener('click', turnClick, false);
-	// }
 }
-
 
 
 function turnClick(square) {
@@ -253,7 +250,7 @@ function turn(squareId, player) {
 function checkWin(board, player) {
 	let plays = board.reduce((a, e, i) => 
 		(e === player) ? a.concat(i) : a, []);
-	let gameWon = false;
+	let gameWon = null;
 	for (let [index, win] of WINNING_COMBINATIONS.entries()) {
 		if (win.every(elem => plays.indexOf(elem) > -1)) {
 			gameWon = {index: index, player: player};
@@ -274,13 +271,34 @@ function declareWinner(gameWon) {
   if(gameWon.player == huPlayer){
     playerWins.style.display = "block";
     player1Wins.style.display = "block";
+    player1Wins.textContent = "YOU WON!";
     player2Wins.style.display = "none";
     resultX.textContent++;
+
+
+
+
+    XWINS.style.display = "block";
+    OWINS.style.display = "none";
+    X_IMG.style.display = "block";
+    O_IMG.style.display = "none";
+
+
+    
   } else if(gameWon.player == aiPlayer){
     playerWins.style.display = "block";
     player1Wins.style.display = "none";
     player2Wins.style.display = "block";
+    player2Wins.textContent = "OH NO, YOU LOST…";
     resultO.textContent++;
+
+
+    XWINS.style.display = "none";
+    OWINS.style.display = "block";
+    X_IMG.style.display = "none";
+    O_IMG.style.display = "block";
+
+
   }  else{
     tieSection.style.display = "block";
   }
@@ -304,12 +322,6 @@ function checkTie() {
 	}
 	return false;
 }
-
-
-
-
-
-
 
 
 
