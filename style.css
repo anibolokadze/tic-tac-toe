@@ -19,7 +19,7 @@
 }
 /* select player */
 .pick-player{
-  background-color: var(--Semi-Dark-Navy);
+  background-color: red;
   box-shadow: inset 0px -8px 0px var(--Dark-Navy-Shadow);
   border-radius: 15px;
   display: grid;
