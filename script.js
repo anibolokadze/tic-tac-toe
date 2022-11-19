@@ -278,6 +278,7 @@ function checkWin(board, player) {
 		}
 	}
 	return gameWon;
+  
 }
 
 function gameOver(gameWon) {
