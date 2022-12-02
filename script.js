@@ -1,6 +1,5 @@
 
 let startContainer = document.getElementById('start-container');
-let newGameCPU = document.getElementById("newGameCPU");
 let newGamePlayer = document.getElementById("newGamePlayer");
 let boardWrapper = document.getElementById('board-wrapper');
 
@@ -26,8 +25,6 @@ let resetBtn = document.getElementById('resetBtn');
 
 let resultX = document.getElementById("x-player-span");
 let resultO = document.getElementById("o-player-span");
-let text = document.getElementById('text');
-let gameResults = document.getElementsByClassName('game-results');
 
 
 
@@ -44,16 +41,8 @@ let currentPlayer;
 let xIcon = '<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z" fill="#31C3BD" fill-rule="evenodd"/></svg>';
 let oIcon = '<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M32 0c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C14.327 64 0 49.673 0 32 0 14.327 14.327 0 32 0Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z" fill="#F2B137"/></svg>';
 
-
-
 let running = true;
 
-
-let player;
-
-let origBoard;
-let huPlayer = 'X';
-let aiPlayer = 'O';
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -69,42 +58,22 @@ const WINNING_COMBINATIONS = [
 
 xPlayer.addEventListener('click', () => {
   currentPlayer = xPlayer.value;
-  huPlayer = 'X';
-  aiPlayer = 'O';
   newGamePlayer.disabled = false;
-  newGameCPU.disabled = false;
-
-  if(currentPlayer = xPlayer.value){
-    xPlayerTitle.textContent = "X (YOU)";
-    oPlayerTitle.textContent = "O (CPU)";
-  } 
 
 });
 
 oPlayer.addEventListener('click', () => {
   currentPlayer = oPlayer.value;
-  huPlayer = 'O';
-  aiPlayer = 'X';
   newGamePlayer.disabled = false;
-  newGameCPU.disabled = false;
-
-  if(currentPlayer = oPlayer.value){
-    oPlayerTitle.textContent = "X (CPU)";
-    xPlayerTitle.textContent = "O (YOU)";
-
-    
-  } 
 });
 
 if(currentPlayer == null){
   newGamePlayer.disabled = true;
-  newGameCPU.disabled = true;
 }
 
 newGamePlayer.addEventListener('click', newGameP);
 function newGameP(){
   startContainer.style.display = "none";
-  newGameCPU.style.display = "none";
   boardWrapper.style.display = "block";
   xPlayerTitle.textContent = "X (P1)";
   oPlayerTitle.textContent = "O (P2)"
@@ -203,14 +172,6 @@ function nextRound(){
   cells.forEach(cell => cell.textContent = "");
   running = true; 
 
-  origBoard = Array.from(Array(9).keys());
-  cells.forEach(cell => cell.addEventListener('click',turnClick));
-
-  if(currentPlayer == 'O'){
-    turn(bestSpot(), aiPlayer);
-  }
-
-  
 }
 function quit(){
   window.location.reload();
@@ -225,120 +186,4 @@ function quit(){
 
 
 
-
-newGameCPU.addEventListener('click', newGameC);
-function newGameC(){
-  startContainer.style.display = "none";
-  newGameCPU.style.display = "block";
-  newGamePlayer.style.display = "none";
-  boardWrapper.style.display = "block";
-
-  startGameCPU();
-};
-
-function startGameCPU(){
-  resultO.innerHTML = 0;
-  resultX.innerHTML = 0;
-  resultTies.innerHTML = 0;
-  statusText.textContent = `${currentPlayer} turn`;
-	origBoard = Array.from(Array(9).keys());
-  cells.forEach(cell => cell.addEventListener('click',turnClick));
-  if(currentPlayer === 'O'){
-    turn(bestSpot(), aiPlayer);
-  }
-}
-
-function turnClick(square) {
-	if (typeof origBoard[square.target.id] == 'number') {
-		turn(square.target.id, huPlayer);
-		if (!checkTie()) turn(bestSpot(), aiPlayer);
-	}
-
-
-}
-
-
-function turn(squareId, player) {
-  origBoard[squareId] = player;
-  document.getElementById(squareId).innerHTML = player === "X" ? xIcon : oIcon;
-  
-	
-	let gameWon = checkWin(origBoard, player);
-	if (gameWon) gameOver(gameWon);
-}
-
-
-function checkWin(board, player) {
-	let plays = board.reduce((a, e, i) => (e === player) ? a.concat(i) : a, []);
-	let gameWon = null;
-	for (let [index, win] of WINNING_COMBINATIONS.entries()) {
-		if (win.every(elem => plays.indexOf(elem) > -1)) {
-			gameWon = {index: index, player: player};
-			break;
-		}
-	}
-	return gameWon;
-  
-}
-
-function gameOver(gameWon) {
-	for (let i = 0; i < cells.length; i++) {
-		cells[i].removeEventListener('click', turnClick, false);
-	}
-	declareWinner(gameWon);
-}
-
-function declareWinner(gameWon) {
-  if(gameWon.player == huPlayer){
-    playerWins.style.display = "block";
-    player1Wins.style.display = "block";
-    player1Wins.textContent = "YOU WON!";
-    player2Wins.style.display = "none";
-    resultX.textContent++;
-
-    XWINS.style.display = "block";
-    OWINS.style.display = "none";
-    X_IMG.style.display = "block";
-    O_IMG.style.display = "none";
-
-    
-  } else if(gameWon.player == aiPlayer){
-    playerWins.style.display = "block";
-    player1Wins.style.display = "none";
-    player2Wins.style.display = "block";
-    player2Wins.textContent = "OH NO, YOU LOST…";
-    resultO.textContent++;
-
-
-    XWINS.style.display = "none";
-    OWINS.style.display = "block";
-    X_IMG.style.display = "none";
-    O_IMG.style.display = "block";
-
-
-  }  else{
-    tieSection.style.display = "block";
-    resultTies.textContent++;
-  }
-}
-
-function emptySquares() {
-	return origBoard.filter(s => typeof s == 'number');
-}
-
-function bestSpot() {
-	return emptySquares()[0];
-}
-
-function checkTie() {
-	if (emptySquares().length == 0) {
-		for (let i = 0; i < cells.length; i++) {
-			cells[i].removeEventListener('click', turnClick, false);
-		}
-		declareWinner();
-		return true;
-	}
-	return false;
-
-}
 

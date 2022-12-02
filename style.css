@@ -48,12 +48,6 @@
   height: 56px;
   padding-bottom: 3px;
 }
-#newGameCPU{
-  margin: 2em 0 1em 0;
-  background: var(--Light-Yellow);
-  box-shadow: inset 0px -8px 0px var(--Light-Yellow-Shadow);
-  color: var(--Dark-Navy);
-}
 #newGamePlayer{
   background: var(--Light-Blue);
   box-shadow: inset 0px -8px 0px var(--Light-Blue-Shadow);
@@ -235,7 +229,7 @@
 .X-O-container button:focus{
   background-color: var(--Silver);
 }
-#newGameCPU:hover, #yesRestartBtn:hover,#nextRoundBtn:hover{
+#yesRestartBtn:hover,#nextRoundBtn:hover{
   background-color: var(--Light-Yellow-Hover);
 }
 #newGamePlayer:hover{
@@ -250,16 +244,4 @@
 .img{
   display: flex;
   gap: 8px;
-}
-
-
-.ohover:hover{
-  background-image: url('assets/icon-o-outline.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.xhover:hover{
-  background-image: url('assets/icon-x-outline.svg');
-  background-repeat: no-repeat;
-  background-position: center;
 }
