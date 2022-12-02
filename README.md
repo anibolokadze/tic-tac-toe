@@ -1,2 +1,2 @@
 # tic-tac-toe
-in the process
+Live: https://anibolokadze.github.io/tic-tac-toe/
